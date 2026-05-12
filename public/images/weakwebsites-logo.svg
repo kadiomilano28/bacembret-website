@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620 260" width="1620" height="260">
+  <!-- weakwebsites — transparent-bg utility lockup. brand v1.0 -->
+  <text x="20" y="200"
+        font-family="'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace"
+        font-weight="500"
+        font-size="200"
+        letter-spacing="-8"
+        fill="#0a0a0a">weakwebsites</text>
+  <text x="1480" y="200"
+        font-family="'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace"
+        font-weight="500"
+        font-size="200"
+        fill="#e24b4a">.</text>
+  <line x1="10" y1="128" x2="494" y2="142" stroke="#e24b4a" stroke-width="22" stroke-linecap="square"/>
+</svg>
