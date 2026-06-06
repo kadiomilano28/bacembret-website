@@ -10,10 +10,10 @@ export function EatSipSection() {
           relaks <span className="not-italic font-normal text-black/55">apo</span> festë
         </h2>
 
-        <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:gap-28">
+        <div className="grid grid-cols-1 gap-[168px] md:grid-cols-2 lg:gap-[264px]">
         {/* EAT */}
         <div className="relative flex flex-col items-center">
-          <div className="relative aspect-[3/4] w-full max-w-[460px] overflow-hidden rounded-[600px] bg-black/5">
+          <div className="relative aspect-[3/4] w-full max-w-[690px] overflow-hidden rounded-[600px] bg-black/5">
             <video
               className="h-full w-full object-cover"
               autoPlay
@@ -50,12 +50,12 @@ export function EatSipSection() {
 
         {/* SIP */}
         <div className="relative flex flex-col items-center">
-          <div className="relative aspect-[3/4] w-full max-w-[460px] overflow-hidden rounded-[600px] bg-[#f4ecdf]">
+          <div className="relative aspect-[3/4] w-full max-w-[690px] overflow-hidden rounded-[600px] bg-[#f4ecdf]">
             <Image
               src="/images/2024/10/sip-bg.jpg"
               alt="Vibrant juice"
               fill
-              sizes="(min-width: 768px) 460px, 100vw"
+              sizes="(min-width: 768px) 690px, 100vw"
               className="object-cover"
             />
             {/* Glass overlay */}
@@ -64,7 +64,7 @@ export function EatSipSection() {
               alt=""
               aria-hidden
               fill
-              sizes="(min-width: 768px) 460px, 100vw"
+              sizes="(min-width: 768px) 690px, 100vw"
               className="object-contain object-bottom"
             />
           </div>
