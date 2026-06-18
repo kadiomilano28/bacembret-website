@@ -64,6 +64,17 @@ export function SiteHeader() {
   const isHero = pathname === "/";
   const isFloating = mode === "floating";
 
+  // Handle nav clicks — close mobile menu, and if clicking home while on homepage, smooth-scroll to top
+  const handleNavClick = (href: string) => (
+    e: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    if (href === "/" && pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    if (open) setOpen(false);
+  };
+
   // In floating mode, always use light theme (white bg + black text) for readability
   const headerBgClass = isFloating
     ? "bg-white border-b border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
@@ -110,6 +121,7 @@ export function SiteHeader() {
                 external={link.external}
                 textColor={textColor}
                 hoverColor={hoverColor}
+                onClick={handleNavClick(link.href)}
               >
                 {link.label}
               </NavItem>
@@ -166,6 +178,7 @@ export function SiteHeader() {
                 textColor={textColor}
                 hoverColor={hoverColor}
                 highlightBorder={highlightBorder}
+                onClick={handleNavClick(link.href)}
               >
                 {link.label}
               </NavItem>
@@ -191,6 +204,7 @@ export function SiteHeader() {
               textColor={textColor}
               hoverColor={hoverColor}
               highlightBorder={highlightBorder}
+              onClick={handleNavClick(link.href)}
             >
               {link.label}
             </NavItem>
@@ -208,6 +222,7 @@ interface NavItemProps {
   textColor: string;
   hoverColor: string;
   highlightBorder?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   children: React.ReactNode;
 }
 
@@ -218,6 +233,7 @@ function NavItem({
   textColor,
   hoverColor,
   highlightBorder,
+  onClick,
   children,
 }: NavItemProps) {
   const baseClass = `font-ui text-[12px] tracking-[0.18em] uppercase ${textColor} ${hoverColor} transition-colors`;
@@ -231,6 +247,7 @@ function NavItem({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={onClick}
         className={`${baseClass} ${highlightClass}`}
       >
         {children}
@@ -238,7 +255,11 @@ function NavItem({
     );
   }
   return (
-    <Link href={href} className={`${baseClass} ${highlightClass}`}>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`${baseClass} ${highlightClass}`}
+    >
       {children}
     </Link>
   );
