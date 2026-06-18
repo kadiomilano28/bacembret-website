@@ -3,29 +3,101 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NAV_LEFT, NAV_RIGHT } from "@/lib/jf-data";
+
+type ScrollMode = "default" | "floating" | "hidden";
+
+const SHOW_AFTER = 150; // px scrolled before floating header logic activates
+const UP_DELTA = 2; // any upward scroll movement >= this reveals the header
+const DOWN_DELTA = 4; // downward scroll must exceed this to hide (avoids jitter)
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<ScrollMode>("default");
+  const lastScrollY = useRef(0);
   const pathname = usePathname();
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
+    const handle = () => {
+      const y = Math.max(0, window.scrollY); // guard against iOS overscroll negative
+      const prev = lastScrollY.current;
+      const diff = y - prev;
+
+      if (y < SHOW_AFTER) {
+        setMode("default");
+      } else if (diff <= -UP_DELTA) {
+        setMode("floating");
+      } else if (diff >= DOWN_DELTA) {
+        setMode("hidden");
+      }
+      lastScrollY.current = y;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        handle();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Also listen to touch events for more reliable mobile detection
+    window.addEventListener("touchmove", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("touchmove", onScroll);
+    };
+  }, []);
+
+  // Close mobile menu when entering hidden mode
+  useEffect(() => {
+    if (mode !== "floating" && open) setOpen(false);
+  }, [mode, open]);
 
   // Light theme on every page EXCEPT the homepage hero (which has a dark video bg)
   const isHero = pathname === "/";
-  const headerBgClass = isHero
-    ? "bg-header-gradient"
-    : "bg-white border-b border-black/5";
-  const textColor = isHero ? "text-white" : "text-black";
-  const hoverColor = isHero ? "hover:text-white/70" : "hover:text-black/60";
-  const hamburgerBar = isHero ? "bg-white" : "bg-black";
-  const highlightBorder = isHero
-    ? "border-white/40 hover:bg-white/10"
-    : "border-black/40 hover:bg-black hover:text-white";
-  const mobileMenuBg = isHero ? "bg-black/85" : "bg-white border-t border-black/10";
+  const isFloating = mode === "floating";
+
+  // In floating mode, always use light theme (white bg + black text) for readability
+  const headerBgClass = isFloating
+    ? "bg-white border-b border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+    : isHero
+      ? "bg-header-gradient"
+      : "bg-white border-b border-black/5";
+  const textColor = isFloating ? "text-black" : isHero ? "text-white" : "text-black";
+  const hoverColor = isFloating
+    ? "hover:text-black/60"
+    : isHero
+      ? "hover:text-white/70"
+      : "hover:text-black/60";
+  const hamburgerBar = isFloating ? "bg-black" : isHero ? "bg-white" : "bg-black";
+  const highlightBorder = isFloating
+    ? "border-black/40 hover:bg-black hover:text-white"
+    : isHero
+      ? "border-white/40 hover:bg-white/10"
+      : "border-black/40 hover:bg-black hover:text-white";
+  const mobileMenuBg = isFloating
+    ? "bg-white border-t border-black/10"
+    : isHero
+      ? "bg-black/85"
+      : "bg-white border-t border-black/10";
+
+  // Position: absolute (integrated into page flow) by default, fixed (floating) when scrolling up
+  const positionClass = isFloating
+    ? "fixed translate-y-0"
+    : mode === "hidden"
+      ? "fixed -translate-y-full"
+      : "absolute translate-y-0";
 
   return (
     <header
-      className={`absolute left-0 top-0 z-40 w-full ${headerBgClass}`}
+      className={`left-0 top-0 z-50 w-full transition-transform duration-300 ease-out ${positionClass} ${headerBgClass}`}
     >
       <div className="mx-auto grid h-[88px] max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-5 sm:px-8 md:h-[136px] lg:px-16">
         {/* Left side: desktop nav OR mobile hamburger */}
@@ -64,9 +136,9 @@ export function SiteHeader() {
           </button>
         </div>
 
-        {/* Center logo — true center via grid; hidden on homepage hero */}
+        {/* Center logo — true center via grid; hidden on homepage hero (default mode only) */}
         <div className="justify-self-center">
-          {isHero ? (
+          {isHero && !isFloating ? (
             <span aria-hidden />
           ) : (
             <Link href="/" aria-label="Baçe Mbret home" className="block">
