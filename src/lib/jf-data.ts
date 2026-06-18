@@ -1,6 +1,7 @@
 import type { BowlSlide, GalleryItem, NavLink, RestaurantInfo } from "@/types/jf";
 
 export const NAV_LEFT: NavLink[] = [
+  { label: "HOME", href: "/" },
   { label: "MENU", href: "/menu" },
   { label: "RRETH NESH", href: "/about" },
 ];
