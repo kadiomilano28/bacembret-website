@@ -108,7 +108,7 @@ export function SiteFooter() {
 
             <div className="footer-bottom-area">
               <h4 className="footer-title mb-6 font-[var(--font-display)] text-[22px] font-semibold lowercase text-black md:mb-10 md:text-[24px]">
-                business hours
+                orari
               </h4>
               <ul className="font-ui flex flex-col gap-1 text-[14px] leading-[30px] text-black">
                 {RESTAURANT.hours.map((h) => (

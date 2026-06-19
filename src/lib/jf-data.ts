@@ -16,7 +16,7 @@ export const RESTAURANT: RestaurantInfo = {
   email: "mirë@bacembret.al",
   address: "rruga elbasan — librazhd",
   city: "xibrakë, elbasan",
-  hours: [{ label: "monday — sunday", value: "10:28 — 22:00" }],
+  hours: [{ label: "e hënë — e diel", value: "10:28 — 22:00" }],
   social: {
     instagram: "https://www.instagram.com/bacembret_restorant",
     facebook: "https://www.facebook.com/restorantbacembret",
