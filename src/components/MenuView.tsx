@@ -35,18 +35,6 @@ export function MenuView() {
           ))}
         </ul>
 
-        {/* PDF link */}
-        <div className="mt-8 flex justify-center">
-          <a
-            href="/menu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-ui inline-flex items-center gap-2 text-[12px] tracking-[0.3em] uppercase text-black/70 transition-colors hover:text-black"
-          >
-            view pdf
-            <span aria-hidden>→</span>
-          </a>
-        </div>
 
         {/* Categories stacked, each with 3-col grid */}
         <div>
