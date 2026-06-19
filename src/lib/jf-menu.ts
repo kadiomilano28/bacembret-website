@@ -86,7 +86,6 @@ export const MENU: MenuCategory[] = [
       { name: "Qofte me mish viçi (4 copë)", price: "500L", image: "/images/menu/qofte-shtepie.png" },
       { name: "Qofte perimesh (4 copë)", price: "400L", image: "/images/menu/qofte-perime.png" },
       { name: "Perime zgare", price: "300L", image: "/images/menu/perime-zgare.png" },
-      { name: "Qofte tradicionale", price: "400L", image: "/images/menu/qofte-shtepie.png" },
     ],
   },
   {
