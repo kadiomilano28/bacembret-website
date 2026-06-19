@@ -83,7 +83,7 @@ export const MENU: MenuCategory[] = [
     label: "garnier",
     items: [
       { name: "Patate të skuqura", price: "250L", image: "/images/menu/patate.png" },
-      { name: "Qofte me mish viçi (4 copë)", price: "500L", image: "/images/menu/qofte-shtepie-mish-vici.png" },
+      { name: "Qofte me mish viçi (4 copë)", price: "500L", image: "/images/menu/qofte-shtepie.png" },
       { name: "Qofte perimesh (4 copë)", price: "400L", image: "/images/menu/qofte-perime.png" },
       { name: "Perime zgare", price: "300L", image: "/images/menu/perime-zgare.png" },
       { name: "Qofte tradicionale", price: "400L", image: "/images/menu/qofte-shtepie.png" },
