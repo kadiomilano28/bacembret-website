@@ -150,7 +150,7 @@ export function AboutView() {
                 className="font-ui group inline-flex items-center gap-3 text-[13px] tracking-[0.22em] uppercase text-black"
               >
                 <span className="border-b border-black/60 pb-1 transition-colors group-hover:border-black">
-                  shiko menynë
+                  shiko menunë
                 </span>
                 <span
                   aria-hidden
@@ -267,7 +267,7 @@ export function AboutView() {
               href="/menu"
               className="font-ui inline-flex items-center gap-3 rounded-full border border-black bg-black px-7 py-3 text-[13px] tracking-[0.22em] uppercase text-white transition-colors hover:bg-transparent hover:text-black"
             >
-              shiko menynë
+              shiko menunë
               <span aria-hidden>→</span>
             </Link>
             <Link
